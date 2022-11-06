@@ -1,5 +1,5 @@
 import {IDrug} from "../../models/IDrug";
-import { createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {fetchDrugs} from "../actions/drugsAction";
 
 
@@ -18,16 +18,16 @@ const drugsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchDrugs.pending, (state) =>{
+        builder.addCase(fetchDrugs.pending, (state) => {
             state.loading = "pending"
         })
-        builder.addCase(fetchDrugs.fulfilled, (state, action) => {
-            state.drugs = action.payload
-            state.loading = "succeeded"
-        })
-        builder.addCase(fetchDrugs.rejected, (state) => {
-            state.loading = "failed"
-        })
+            .addCase(fetchDrugs.fulfilled, (state, action) => {
+                state.drugs = action.payload
+                state.loading = "succeeded"
+            })
+            .addCase(fetchDrugs.rejected, (state) => {
+                state.loading = "failed"
+            })
     }
 })
 
