@@ -1,8 +1,7 @@
 import {StyleSheet, View, Text} from "react-native";
 import React, {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
-import {fetchDrugs} from "../store/reducers/drugsSlice";
-// import {fetchDrugs} from "../store/actions/drugsAction";
+import {fetchDrugs} from "../store/actions/drugsAction";
 
 const Home = () => {
     const dispatch = useAppDispatch()
@@ -11,12 +10,19 @@ const Home = () => {
         dispatch(fetchDrugs())
     }, [])
 
+    useEffect(() =>{
+        console.log("loading status: " + loading);
+    },[loading])
+
     return (
-        <View>
-            <Text>
-                {JSON.stringify(drugs)}
-            </Text>
-        </View>
+        loading === "pending" ?
+            <View><Text>Loading..</Text></View>
+            :
+            <View>
+                <Text>
+                    {JSON.stringify(drugs)}
+                </Text>
+            </View>
     );
 };
 
