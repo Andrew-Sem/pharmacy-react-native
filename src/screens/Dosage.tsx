@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from "react-native";
 
-const Table3 = () => {
+const Dosage = () => {
     return (
         <View>
             <Text>table 3</Text>
@@ -9,4 +9,4 @@ const Table3 = () => {
     );
 };
 
-export default Table3;
+export default Dosage;

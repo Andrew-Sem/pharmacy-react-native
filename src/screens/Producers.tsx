@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from "react-native";
 
-const Table2 = () => {
+const Producers = () => {
     return (
         <View>
             <Text>table 2</Text>
@@ -9,4 +9,4 @@ const Table2 = () => {
     );
 };
 
-export default Table2;
+export default Producers;

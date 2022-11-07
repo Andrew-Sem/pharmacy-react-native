@@ -9,7 +9,7 @@ interface DrugsListProps{
 
 const DrugsList:FC<DrugsListProps> = ({drugs}) => {
     return (
-        <View>
+        <View style={styles.list}>
             {drugs.map((drug) => (
                 <Drug drug={drug} key={drug.id}/>
             ))}
@@ -18,6 +18,9 @@ const DrugsList:FC<DrugsListProps> = ({drugs}) => {
 };
 
 const styles = StyleSheet.create({
+    list:{
+        marginTop: 15
+    }
 })
 
 export default DrugsList;

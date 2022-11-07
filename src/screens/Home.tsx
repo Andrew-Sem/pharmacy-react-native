@@ -1,25 +1,26 @@
 import React from 'react';
 import {Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {ChevronRightIcon} from "react-native-heroicons/mini";
+import {i18n} from "../../assets/resourses/localization";
 
 
 //@ts-ignore
 const Home = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate("table1")} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate("Drugs")} style={styles.button}>
                 <Text style={styles.text}>
-                    Drugs <ChevronRightIcon size={20} color={"white"}/>
+                    {i18n.t("Drugs")} <ChevronRightIcon size={20} color={"white"}/>
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("table2")} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate("Producers")} style={styles.button}>
                 <Text style={styles.text}>
-                    Producers <ChevronRightIcon size={20} color={"white"}/>
+                    {i18n.t("Producers")} <ChevronRightIcon size={20} color={"white"}/>
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("table3")} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate("Dosage")} style={styles.button}>
                 <Text style={styles.text}>
-                    Dosage <ChevronRightIcon size={20} color={"white"}/>
+                    {i18n.t("Dosage")} <ChevronRightIcon size={20} color={"white"}/>
                 </Text>
             </TouchableOpacity>
         </View>
@@ -30,7 +31,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "#fff"
     },
     button: {
         backgroundColor: "#b594ff",

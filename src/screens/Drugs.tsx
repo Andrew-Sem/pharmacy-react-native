@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {fetchDrugs} from "../store/actions/drugsAction";
 import DrugsList from "../components/DrugsList";
 
-const Table1 = () => {
+const Drugs = () => {
     const dispatch = useAppDispatch()
     const {loading, drugs} = useAppSelector(state => state.drug)
     useEffect(() => {
@@ -36,6 +36,8 @@ const Table1 = () => {
 const styles = StyleSheet.create({
     app: {
         flex: 1,
+        backgroundColor: "#fff",
+        paddingHorizontal: 15
     },
     error:{
         flex: 1,
@@ -47,4 +49,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Table1;
+export default Drugs;

@@ -4,9 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { i18n } from "./assets/resourses/localization";
 import {Provider} from "react-redux";
 import {store} from "./src/store/store";
-import Table1 from "./src/screens/Table1";
-import Table2 from "./src/screens/Table2";
-import Table3 from "./src/screens/Table3";
+import Drugs from "./src/screens/Drugs";
+import Producers from "./src/screens/Producers";
+import Dosage from "./src/screens/Dosage";
 
 const Stack = createStackNavigator();
 
@@ -21,19 +21,19 @@ export default function App() {
                       options={{ title: i18n.t("Home") }}
                   />
                   <Stack.Screen
-                      name="table1"
-                      component={Table1}
-                      options={{ title: i18n.t("Table1") }}
+                      name="Drugs"
+                      component={Drugs}
+                      options={{ title: i18n.t("Drugs") }}
                   />
                   <Stack.Screen
-                      name="table2"
-                      component={Table2}
-                      options={{ title: i18n.t("Table2") }}
+                      name="Producers"
+                      component={Producers}
+                      options={{ title: i18n.t("Producers") }}
                   />
                   <Stack.Screen
-                      name="table3"
-                      component={Table3}
-                      options={{ title: i18n.t("Table3") }}
+                      name="Dosage"
+                      component={Dosage}
+                      options={{ title: i18n.t("Dosage") }}
                   />
               </Stack.Navigator>
           </NavigationContainer>

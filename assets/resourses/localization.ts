@@ -4,15 +4,15 @@ import { I18n } from "i18n-js";
 const translations = {
   en: {
     Home: "Home",
-    Table1: "Table 1",
-    Table2: "Table 2",
-    Table3: "Table 3"
+    Drugs: "Drugs",
+    Producers: "Producers",
+    Dosage: "Dosage"
   },
   ru: {
     Home: "Главная",
-    Table1: "Таблица 1",
-    Table2: "Таблица 2",
-    Table3: "Таблица 3"
+    Drugs: "Лекарства",
+    Producers: "Производители",
+    Dosage: "Дозировка"
   },
 };
 export const i18n = new I18n(translations);
