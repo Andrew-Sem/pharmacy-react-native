@@ -1,35 +1,49 @@
-import {StyleSheet, View, Text} from "react-native";
-import React, {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../hooks/redux";
-import {fetchDrugs} from "../store/actions/drugsAction";
+import React from 'react';
+import {Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ChevronRightIcon} from "react-native-heroicons/mini";
 
-const Home = () => {
-    const dispatch = useAppDispatch()
-    const {loading, drugs} = useAppSelector(state => state.drug)
-    useEffect(() => {
-        dispatch(fetchDrugs())
-    }, [])
 
-    useEffect(() =>{
-        console.log("loading status: " + loading);
-    },[loading])
-
+//@ts-ignore
+const Home = ({navigation}) => {
     return (
-        loading === "pending" ?
-            <View><Text>Loading..</Text></View>
-            :
-            <View>
-                <Text>
-                    {JSON.stringify(drugs)}
+        <View style={styles.container}>
+            <TouchableOpacity onPress={() => navigation.navigate("table1")} style={styles.button}>
+                <Text style={styles.text}>
+                    Drugs <ChevronRightIcon size={20} color={"white"}/>
                 </Text>
-            </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("table2")} style={styles.button}>
+                <Text style={styles.text}>
+                    Producers <ChevronRightIcon size={20} color={"white"}/>
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("table3")} style={styles.button}>
+                <Text style={styles.text}>
+                    Dosage <ChevronRightIcon size={20} color={"white"}/>
+                </Text>
+            </TouchableOpacity>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
     },
-});
+    button: {
+        backgroundColor: "#b594ff",
+        paddingVertical: 20,
+        paddingHorizontal: 30,
+        borderRadius: 10,
+        marginVertical: 10
+    },
+    text: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 24,
+    }
+})
 
 export default Home;
