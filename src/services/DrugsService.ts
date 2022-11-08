@@ -7,4 +7,7 @@ export class DrugsService{
     static fetchDrugs():Promise<AxiosResponse<IDrug[]>>{
         return $api.get<IDrug[]>("drugs/v1/catalogue")
     }
+    static deleteDrugById(id: string){
+        return $api.get("drugs/v1/delete/" + id)
+    }
 }

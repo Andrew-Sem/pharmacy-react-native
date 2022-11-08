@@ -2,12 +2,18 @@ import React, {FC} from 'react';
 import {IDrug} from "../models/IDrug";
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {PencilIcon, PencilSquareIcon, XMarkIcon} from "react-native-heroicons/mini";
+import {useAppDispatch} from "../hooks/redux";
+import {deleteDrugById} from "../store/reducers/drugsSlice";
 
 interface DrugProps{
     drug: IDrug,
 }
 
 const Drug:FC<DrugProps> = ({drug}) => {
+    const dispatch = useAppDispatch()
+    const deleteHandler = (id: string) => {
+        dispatch(deleteDrugById(id))
+    }
     return (
         <View style={styles.drug}>
             <Text style={styles.text}>
@@ -17,7 +23,7 @@ const Drug:FC<DrugProps> = ({drug}) => {
                 <TouchableOpacity style={styles.action}>
                     <PencilIcon size={20} color={"#434343"} style={styles.icon}/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.action}>
+                <TouchableOpacity style={styles.action} onPress={() => deleteHandler(drug.id)}>
                     <XMarkIcon size={20} color={"red"}  style={styles.icon}/>
                 </TouchableOpacity>
             </View>

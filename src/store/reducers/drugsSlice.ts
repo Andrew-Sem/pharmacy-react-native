@@ -1,5 +1,5 @@
 import {IDrug} from "../../models/IDrug";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchDrugs} from "../actions/drugsAction";
 
 
@@ -16,7 +16,11 @@ const initialState: DrugsState = {
 const drugsSlice = createSlice({
     name: "drugs",
     initialState,
-    reducers: {},
+    reducers: {
+        deleteDrugById: (state, action: PayloadAction<string>) => {
+            state.drugs = state.drugs.filter((drug) => drug.id !== action.payload)
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchDrugs.pending, (state) => {
             state.loading = "pending"
@@ -30,6 +34,8 @@ const drugsSlice = createSlice({
             })
     }
 })
+
+export const {deleteDrugById} = drugsSlice.actions
 
 export default drugsSlice.reducer
 

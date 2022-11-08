@@ -11,10 +11,6 @@ const Drugs = () => {
         dispatch(fetchDrugs())
     }, [])
 
-    useEffect(() => {
-        console.log("loading status: " + loading);
-    }, [loading])
-
     if(loading === "failed"){
         return (
             <View style={styles.error}>
