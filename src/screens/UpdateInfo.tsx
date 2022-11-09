@@ -1,15 +1,16 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import { TextInput } from "react-native-gesture-handler";
 import { i18n } from "../../assets/resourses/localization";
+import { IDrug } from "../models/IDrug";
 
-const AddDrug = () => {
-  const [drugName, setDrugName] = useState("");
-  const [producer, setProducer] = useState("");
-  const [dosage, setDosage] = useState("");
-  const [price, setPrice] = useState(0);
-  const [composition, setComposition] = useState("");
-
+//@ts-ignore
+const UpdateInfo = ({ route }) => {
+  const drug: IDrug = route.params.drug;
+  const [drugName, setDrugName] = useState(drug.drugName);
+  const [producer, setProducer] = useState(drug.producerName);
+  const [dosage, setDosage] = useState(drug.dosageFormName);
+  const [price, setPrice] = useState(drug.price);
+  const [composition, setComposition] = useState(drug.composition);
   return (
     <View style={styles.screen}>
       <View>
@@ -44,7 +45,7 @@ const AddDrug = () => {
           style={styles.input}
         />
       </View>
-      <Button title="add drug" />
+      <Button title={i18n.t("UpdateInfo")} />
     </View>
   );
 };
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: 15,
     paddingTop: 20,
+    // justifyContent: "center",
   },
   input: {
     borderBottomColor: "#000",
@@ -70,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddDrug;
+export default UpdateInfo;
