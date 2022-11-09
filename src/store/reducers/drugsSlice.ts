@@ -1,7 +1,6 @@
 import { IDrug } from "../../models/IDrug";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchDrugs, deleteDrugById } from "../actions/drugsAction";
-import { DrugsService } from "./../../services/DrugsService";
 
 interface DrugsState {
   drugs: Array<IDrug>;
@@ -18,6 +17,7 @@ const drugsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // fetch all drugs
     builder
       .addCase(fetchDrugs.pending, (state) => {
         state.loading = "pending";
@@ -29,16 +29,16 @@ const drugsSlice = createSlice({
       .addCase(fetchDrugs.rejected, (state) => {
         state.loading = "failed";
       });
+    // delete drug by id
     builder
       .addCase(deleteDrugById.pending, (state) => {
         state.loading = "pending";
       })
-      .addCase(deleteDrugById.fulfilled, (state, action) => {
+      .addCase(deleteDrugById.fulfilled, (state) => {
         state.loading = "succeeded";
       })
-      .addCase(deleteDrugById.rejected, (state, action) => {
+      .addCase(deleteDrugById.rejected, (state) => {
         state.loading = "failed";
-        console.log(action.error);
       });
   },
 });

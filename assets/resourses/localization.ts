@@ -6,13 +6,19 @@ const translations = {
     Home: "Home",
     Drugs: "Drugs",
     Producers: "Producers",
-    Dosage: "Dosage"
+    Dosage: "Dosage",
+    AddDrug: "Add drug",
+    DrugName: "Drug name",
+    Producer: "Producer",
   },
   ru: {
     Home: "Главная",
     Drugs: "Лекарства",
     Producers: "Производители",
-    Dosage: "Дозировка"
+    Dosage: "Дозировка",
+    AddDrug: "Добавить лекарство",
+    DrugName: "Наименование лекарства",
+    Producer: "Производитель",
   },
 };
 export const i18n = new I18n(translations);
