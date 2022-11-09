@@ -6,26 +6,37 @@ import { i18n } from "../../assets/resourses/localization";
 
 interface ButtonProps {
   title: string;
+  onPress: () => void;
 }
 
-const Button: FC<ButtonProps> = ({ title }) => {
+const Btn: FC<ButtonProps> = ({ title, onPress }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       //@ts-ignore
-      onPress={() => navigation.navigate("Dosage")}
+      onPress={onPress}
       style={styles.button}
     >
       <Text style={styles.text}>
-        {i18n.t("Dosage")} <ChevronRightIcon size={20} color={"white"} />
+        {title} <ChevronRightIcon size={20} color={"white"} />
       </Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {},
-  text: {},
+  button: {
+    backgroundColor: "#b594ff",
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginVertical: 10,
+  },
+  text: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 24,
+  },
 });
 
-export default Button;
+export default Btn;
