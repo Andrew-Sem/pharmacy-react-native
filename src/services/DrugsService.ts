@@ -9,4 +9,21 @@ export class DrugsService {
   static deleteDrugById(id: string) {
     return $api.delete("drugs/v1/delete/" + id);
   }
+
+  static updateDrugById({
+    id,
+    drugName,
+    composition,
+    dosageFormName,
+    producerName,
+    price,
+  }: IDrug) {
+    return $api.post("drugs/v1/update/" + id, {
+      drugName,
+      price,
+      composition,
+      producerName,
+      dosageFormName,
+    });
+  }
 }

@@ -5,6 +5,7 @@ import { PencilIcon, XMarkIcon } from "react-native-heroicons/mini";
 import { useAppDispatch } from "../hooks/redux";
 import { deleteDrugById, fetchDrugs } from "../store/actions/drugsAction";
 import { useNavigation } from "@react-navigation/native";
+import { i18n } from "../../assets/resourses/localization";
 
 interface DrugProps {
   drug: IDrug;
@@ -19,20 +20,38 @@ const Drug: FC<DrugProps> = ({ drug }) => {
   };
   return (
     <View style={styles.drug}>
-      <Text style={styles.text}>{drug.drugName}</Text>
+      <View>
+        <Text style={styles.title}>{drug.drugName}</Text>
+        <View style={styles.desciptionBlock}>
+          <Text style={styles.descriptionTitle}>{i18n.t("Price")}: </Text>
+          <Text>{drug.price} $</Text>
+        </View>
+        <View style={styles.desciptionBlock}>
+          <Text style={styles.descriptionTitle}>{i18n.t("Producer")}: </Text>
+          <Text>{drug.producerName}</Text>
+        </View>
+        <View style={styles.desciptionBlock}>
+          <Text style={styles.descriptionTitle}>{i18n.t("Dosage")}: </Text>
+          <Text>{drug.dosageFormName}</Text>
+        </View>
+        <View style={styles.desciptionBlock}>
+          <Text style={styles.descriptionTitle}>{i18n.t("Composition")}: </Text>
+          <Text>{drug.composition}</Text>
+        </View>
+      </View>
       <View style={styles.actions}>
+        <TouchableOpacity
+          style={styles.action}
+          onPress={() => deleteHandler(drug.id)}
+        >
+          <XMarkIcon size={20} color={"red"} style={styles.icon} />
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.action}
           //@ts-ignore
           onPress={() => navigation.navigate("UpdateInfo", { drug })}
         >
           <PencilIcon size={20} color={"#434343"} style={styles.icon} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.action}
-          onPress={() => deleteHandler(drug.id)}
-        >
-          <XMarkIcon size={20} color={"red"} style={styles.icon} />
         </TouchableOpacity>
       </View>
     </View>
@@ -48,23 +67,27 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     justifyContent: "space-between",
     flexDirection: "row",
-    alignItems: "center",
     borderWidth: 1,
     borderColor: "gray",
   },
   actions: {
-    flexDirection: "row",
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
   },
   icon: {
     marginLeft: 10,
   },
-  action: {
-    flexDirection: "row",
-  },
-  text: {
-    fontSize: 20,
+  action: {},
+  title: {
+    fontSize: 24,
     fontWeight: "bold",
     color: "#434343",
+  },
+  descriptionTitle: {
+    fontWeight: "bold",
+  },
+  desciptionBlock: {
+    flexDirection: "row",
   },
 });
 

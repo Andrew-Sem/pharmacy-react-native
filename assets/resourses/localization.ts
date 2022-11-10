@@ -10,9 +10,9 @@ const translations = {
     AddDrug: "Add drug",
     DrugName: "Drug name",
     Producer: "Producer",
-    UpdateInfo: "UpdateInfo",
+    UpdateInfo: "Update Info",
     Price: "Price",
-    Conposition: "Composition",
+    Composition: "Composition",
   },
   ru: {
     Home: "Главная",

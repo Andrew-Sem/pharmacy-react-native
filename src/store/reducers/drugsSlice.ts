@@ -1,6 +1,10 @@
 import { IDrug } from "../../models/IDrug";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchDrugs, deleteDrugById } from "../actions/drugsAction";
+import {
+  fetchDrugs,
+  deleteDrugById,
+  updateDrugById,
+} from "../actions/drugsAction";
 
 interface DrugsState {
   drugs: Array<IDrug>;
@@ -38,6 +42,18 @@ const drugsSlice = createSlice({
         state.loading = "succeeded";
       })
       .addCase(deleteDrugById.rejected, (state) => {
+        state.loading = "failed";
+      });
+
+    builder
+      .addCase(updateDrugById.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(updateDrugById.fulfilled, (state) => {
+        state.loading = "succeeded";
+      })
+      .addCase(updateDrugById.rejected, (state, action) => {
+        console.log(action.error);
         state.loading = "failed";
       });
   },

@@ -2,15 +2,45 @@ import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { i18n } from "../../assets/resourses/localization";
 import { IDrug } from "../models/IDrug";
+import Btn from "../components/Btn";
+import { useAppDispatch } from "../hooks/redux";
+import { fetchDrugs, updateDrugById } from "../store/actions/drugsAction";
+import { useNavigation } from "@react-navigation/native";
 
 //@ts-ignore
 const UpdateInfo = ({ route }) => {
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation();
   const drug: IDrug = route.params.drug;
   const [drugName, setDrugName] = useState(drug.drugName);
-  const [producer, setProducer] = useState(drug.producerName);
-  const [dosage, setDosage] = useState(drug.dosageFormName);
+  const [producerName, setProducerName] = useState(drug.producerName);
+  const [dosageFormName, setDosageFormName] = useState(drug.dosageFormName);
   const [price, setPrice] = useState(drug.price);
   const [composition, setComposition] = useState(drug.composition);
+
+  const updateHandler = async ({
+    id,
+    drugName,
+    composition,
+    producerName,
+    dosageFormName,
+    price,
+  }: IDrug) => {
+    await dispatch(
+      updateDrugById({
+        id,
+        drugName,
+        composition,
+        producerName,
+        dosageFormName,
+        price,
+      })
+    );
+    await dispatch(fetchDrugs());
+    //@ts-ignore
+    navigation.navigate("Drugs");
+  };
+
   return (
     <View style={styles.screen}>
       <View>
@@ -22,14 +52,14 @@ const UpdateInfo = ({ route }) => {
         />
         <Text style={styles.labelText}>{i18n.t("Producer")}</Text>
         <TextInput
-          value={producer}
-          onChangeText={setProducer}
+          value={producerName}
+          onChangeText={setProducerName}
           style={styles.input}
         />
         <Text style={styles.labelText}>{i18n.t("Dosage")}</Text>
         <TextInput
-          value={dosage}
-          onChangeText={setDosage}
+          value={dosageFormName}
+          onChangeText={setDosageFormName}
           style={styles.input}
         />
         <Text style={styles.labelText}>{i18n.t("Price")}</Text>
@@ -45,7 +75,19 @@ const UpdateInfo = ({ route }) => {
           style={styles.input}
         />
       </View>
-      <Button title={i18n.t("UpdateInfo")} />
+      <Btn
+        title={i18n.t("UpdateInfo")}
+        onPress={() =>
+          updateHandler({
+            id: drug.id,
+            drugName,
+            composition,
+            dosageFormName,
+            producerName,
+            price,
+          })
+        }
+      />
     </View>
   );
 };

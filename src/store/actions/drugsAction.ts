@@ -1,3 +1,4 @@
+import { IDrug } from "./../../models/IDrug";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { DrugsService } from "../../services/DrugsService";
 
@@ -11,5 +12,26 @@ export const deleteDrugById = createAsyncThunk(
   async (id: string) => {
     const response = await DrugsService.deleteDrugById(id);
     return response.data;
+  }
+);
+
+export const updateDrugById = createAsyncThunk(
+  "drugs/updateById",
+  async ({
+    id,
+    drugName,
+    composition,
+    dosageFormName,
+    producerName,
+    price,
+  }: IDrug) => {
+    const response = await DrugsService.updateDrugById({
+      id,
+      drugName,
+      composition,
+      dosageFormName,
+      producerName,
+      price,
+    });
   }
 );
