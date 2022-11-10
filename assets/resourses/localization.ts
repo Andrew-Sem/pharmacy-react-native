@@ -13,6 +13,7 @@ const translations = {
     UpdateInfo: "Update Info",
     Price: "Price",
     Composition: "Composition",
+    AddProducer: "Add producer",
   },
   ru: {
     Home: "Главная",
@@ -25,6 +26,7 @@ const translations = {
     UpdateInfo: "Обновить инфомацию",
     Price: "Цена",
     Composition: "Состав",
+    AddProducer: "Добавить производителя",
   },
 };
 export const i18n = new I18n(translations);
