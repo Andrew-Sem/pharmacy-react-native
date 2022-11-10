@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { i18n } from "../../assets/resourses/localization";
+import Btn from "../components/Btn";
 
 const AddDrug = () => {
   const [drugName, setDrugName] = useState("");
@@ -44,7 +45,7 @@ const AddDrug = () => {
           style={styles.input}
         />
       </View>
-      <Button title="add drug" />
+      <Btn title="Add drug" onPress={() => {}} />
     </View>
   );
 };
