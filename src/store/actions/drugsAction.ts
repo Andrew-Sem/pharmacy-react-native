@@ -33,5 +33,26 @@ export const updateDrugById = createAsyncThunk(
       producerName,
       price,
     });
+    return response.data;
+  }
+);
+
+export const addDrug = createAsyncThunk(
+  "drugs/addDrug",
+  async ({
+    drugName,
+    composition,
+    dosageFormName,
+    producerName,
+    price,
+  }: IDrug) => {
+    const response = await DrugsService.addDrug({
+      drugName,
+      composition,
+      dosageFormName,
+      producerName,
+      price,
+    });
+    return response.data;
   }
 );

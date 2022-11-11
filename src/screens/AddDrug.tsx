@@ -3,13 +3,32 @@ import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { i18n } from "../../assets/resourses/localization";
 import Btn from "../components/Btn";
+import { useAppDispatch } from "../hooks/redux";
+import { addDrug, fetchDrugs } from "../store/actions/drugsAction";
+import { IDrug } from "../models/IDrug";
 
-const AddDrug = () => {
+//@ts-ignore
+const AddDrug = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const [drugName, setDrugName] = useState("");
-  const [producer, setProducer] = useState("");
-  const [dosage, setDosage] = useState("");
+  const [producerName, setProducerName] = useState("");
+  const [dosageFormName, setDosageFormName] = useState("");
   const [price, setPrice] = useState(0);
   const [composition, setComposition] = useState("");
+
+  const addDrugHandler = async ({
+    producerName,
+    composition,
+    drugName,
+    dosageFormName,
+    price,
+  }: IDrug) => {
+    await dispatch(
+      addDrug({ producerName, composition, drugName, dosageFormName, price })
+    );
+    await dispatch(fetchDrugs());
+    navigation.navigate("Drugs");
+  };
 
   return (
     <View style={styles.screen}>
@@ -22,14 +41,14 @@ const AddDrug = () => {
         />
         <Text style={styles.labelText}>{i18n.t("Producer")}</Text>
         <TextInput
-          value={producer}
-          onChangeText={setProducer}
+          value={producerName}
+          onChangeText={setProducerName}
           style={styles.input}
         />
         <Text style={styles.labelText}>{i18n.t("Dosage")}</Text>
         <TextInput
-          value={dosage}
-          onChangeText={setDosage}
+          value={dosageFormName}
+          onChangeText={setDosageFormName}
           style={styles.input}
         />
         <Text style={styles.labelText}>{i18n.t("Price")}</Text>
@@ -45,7 +64,18 @@ const AddDrug = () => {
           style={styles.input}
         />
       </View>
-      <Btn title="Add drug" onPress={() => {}} />
+      <Btn
+        title="Add drug"
+        onPress={() => {
+          addDrugHandler({
+            producerName,
+            composition,
+            drugName,
+            dosageFormName,
+            price,
+          });
+        }}
+      />
     </View>
   );
 };

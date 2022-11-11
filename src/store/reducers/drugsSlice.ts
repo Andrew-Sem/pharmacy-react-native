@@ -1,3 +1,4 @@
+import { addDrug } from "./../actions/drugsAction";
 import { IDrug } from "../../models/IDrug";
 import { createSlice } from "@reduxjs/toolkit";
 import {
@@ -44,7 +45,7 @@ const drugsSlice = createSlice({
       .addCase(deleteDrugById.rejected, (state) => {
         state.loading = "failed";
       });
-
+    // update
     builder
       .addCase(updateDrugById.pending, (state) => {
         state.loading = "pending";
@@ -53,6 +54,18 @@ const drugsSlice = createSlice({
         state.loading = "succeeded";
       })
       .addCase(updateDrugById.rejected, (state, action) => {
+        console.log(action.error);
+        state.loading = "failed";
+      });
+    // add
+    builder
+      .addCase(addDrug.pending, (state) => {
+        state.loading = "pending";
+      })
+      .addCase(addDrug.fulfilled, (state) => {
+        state.loading = "succeeded";
+      })
+      .addCase(addDrug.rejected, (state, action) => {
         console.log(action.error);
         state.loading = "failed";
       });

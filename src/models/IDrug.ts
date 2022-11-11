@@ -1,5 +1,5 @@
 export interface IDrug {
-  id: string;
+  id?: string;
   drugName: string;
   composition: string;
   producerName: string;

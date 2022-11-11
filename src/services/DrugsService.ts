@@ -26,4 +26,20 @@ export class DrugsService {
       dosageFormName,
     });
   }
+
+  static addDrug({
+    drugName,
+    composition,
+    dosageFormName,
+    producerName,
+    price,
+  }: IDrug) {
+    return $api.post("drugs/v1/new", {
+      drugName,
+      price,
+      composition,
+      producerName,
+      dosageFormName,
+    });
+  }
 }
