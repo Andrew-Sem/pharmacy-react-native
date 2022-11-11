@@ -10,6 +10,7 @@ import Dosage from "./src/screens/Dosage";
 import AddDrug from "./src/screens/AddDrug";
 import UpdateInfo from "./src/screens/UpdateInfo";
 import AddProducer from "./src/screens/AddProducer";
+import AddDosage from "./src/screens/AddDosage";
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,11 @@ export default function App() {
             name="AddProducer"
             component={AddProducer}
             options={{ title: i18n.t("AddProducer") }}
+          />
+          <Stack.Screen
+            name="AddDosage"
+            component={AddDosage}
+            options={{ title: i18n.t("AddDosage") }}
           />
         </Stack.Navigator>
       </NavigationContainer>

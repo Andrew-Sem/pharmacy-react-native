@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import drugReducer from "./reducers/drugsSlice";
 import producerReducer from "./reducers/producersSlice";
+import dosageReducer from "./reducers/dosagesSlice";
 
 export const store = configureStore({
   reducer: {
     drug: drugReducer,
     producer: producerReducer,
+    dosage: dosageReducer,
   },
 });
 
