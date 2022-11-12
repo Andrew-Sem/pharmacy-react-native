@@ -14,10 +14,6 @@ const Drugs = ({ navigation }) => {
     dispatch(fetchDrugs());
   }, []);
 
-  // useEffect(() => {
-  //   console.log(loading);
-  // }, [loading]);
-
   if (loading === "failed") {
     return (
       <View style={styles.error}>

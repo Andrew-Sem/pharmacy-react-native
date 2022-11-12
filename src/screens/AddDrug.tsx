@@ -1,15 +1,22 @@
 import { View, Text, StyleSheet, Button } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { i18n } from "../../assets/resourses/localization";
 import Btn from "../components/Btn";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { addDrug, fetchDrugs } from "../store/actions/drugsAction";
 import { IDrug } from "../models/IDrug";
+import SelectDropdown from "react-native-select-dropdown";
+import { fetchDosages } from "../store/actions/dosagesAction";
+import { fetchProducers } from "../store/actions/producersAction";
 
 //@ts-ignore
 const AddDrug = ({ navigation }) => {
+  const [dosagesNames, setDosagesNames] = useState<Array<string>>([]);
+  const [producersNames, setProducersNames] = useState<Array<string>>([]);
   const dispatch = useAppDispatch();
+  const { dosages, loading } = useAppSelector((state) => state.dosage);
+  const { producers } = useAppSelector((state) => state.producer);
   const [drugName, setDrugName] = useState("");
   const [producerName, setProducerName] = useState("");
   const [dosageFormName, setDosageFormName] = useState("");
@@ -30,6 +37,16 @@ const AddDrug = ({ navigation }) => {
     navigation.navigate("Drugs");
   };
 
+  useEffect(() => {
+    dispatch(fetchDosages());
+    dispatch(fetchProducers());
+  }, []);
+
+  useEffect(() => {
+    setProducersNames(producers.map((producer) => producer.producerName));
+    setDosagesNames(dosages.map((dosage) => dosage.dosageFormName));
+  }, [dosages, producers]);
+
   return (
     <View style={styles.screen}>
       <View>
@@ -37,18 +54,6 @@ const AddDrug = ({ navigation }) => {
         <TextInput
           value={drugName}
           onChangeText={setDrugName}
-          style={styles.input}
-        />
-        <Text style={styles.labelText}>{i18n.t("Producer")}</Text>
-        <TextInput
-          value={producerName}
-          onChangeText={setProducerName}
-          style={styles.input}
-        />
-        <Text style={styles.labelText}>{i18n.t("Dosage")}</Text>
-        <TextInput
-          value={dosageFormName}
-          onChangeText={setDosageFormName}
           style={styles.input}
         />
         <Text style={styles.labelText}>{i18n.t("Price")}</Text>
@@ -64,6 +69,32 @@ const AddDrug = ({ navigation }) => {
           style={styles.input}
         />
       </View>
+      <Text style={styles.labelText}>{i18n.t("Dosage")}</Text>
+      <SelectDropdown
+        data={dosagesNames}
+        onSelect={(selectedItem, index) => {
+          setDosageFormName(selectedItem);
+        }}
+        buttonTextAfterSelection={(selectedItem, index) => {
+          return selectedItem;
+        }}
+        rowTextForSelection={(item, index) => {
+          return item;
+        }}
+      />
+      <Text style={styles.labelText}>{i18n.t("Producer")}</Text>
+      <SelectDropdown
+        data={producersNames}
+        onSelect={(selectedItem, index) => {
+          setProducerName(selectedItem);
+        }}
+        buttonTextAfterSelection={(selectedItem, index) => {
+          return selectedItem;
+        }}
+        rowTextForSelection={(item, index) => {
+          return item;
+        }}
+      />
       <Btn
         title="Add drug"
         onPress={() => {
